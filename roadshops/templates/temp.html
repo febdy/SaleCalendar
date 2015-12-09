@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>로드샵캘린더</title>
+</head>
+<body>
+    <h1>ETUDE_HOUSE</h1>
+
+    {% for shop in shops %}
+        event_name : {{ shop.event_name }} </br>
+        describe : {{ shop.describe }} </br>
+        img_url : {{ shop.image_url }} </br>
+        link_url : {{ shop.link_url }} </br>
+        start_date : {{ shop.start_date }} </br>
+        end_date : {{ shop.end_date }} </br>
+        created_at : {{ shop.created_at }} </br>
+        updated_at : {{ shop.updated_at }} </p>
+    {% endfor %}
+</body>
+</html>
