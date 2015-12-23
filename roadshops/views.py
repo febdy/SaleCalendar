@@ -15,7 +15,9 @@ class Home(TemplateView):
 
 
 def home(request, num=None, num2=None):
-    context = {'num': num, 'num2': num2}
+    Roadshops.objects.all().delete()
+    etude()
+    context = print_etude()
     return render_to_response('main.html', context)
 
 

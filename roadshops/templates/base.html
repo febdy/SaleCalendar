@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>까꿍</title>
+    <link rel='stylesheet' href='{% static "css/fullcalendar.min.css" %}' />
+    <link rel='stylesheet' href='{% static "css/jquery-ui.min.css" %}' />
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+
+    {% block content %}
+    {% endblock %}
+
+    <script src='{% static "js/jquery.min.js" %}'></script>
+    <script src='{% static "js/jquery-ui.custom.min.js" %}'></script>
+    <script src='{% static "js/moment.min.js" %}'></script>
+    <script src='{% static "js/fullcalendar.min.js" %}'></script>
+
+    {% block javascript %}
+    {% endblock %}
+
+</body>
+</html>

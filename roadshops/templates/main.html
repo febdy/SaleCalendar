@@ -1,13 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>MAIN</title>
-</head>
-<body>
-    Hello, Hailey!</br>
-    It's a work with Armin!S2</p>
+{% extends "base.html" %}
 
-    {{ num }} / {{ num2 }}
-</body>
-</html>
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    <div id="month_calendar" style="float: left; width:70%; margin-left: 5%"></div>
+    <div id="today_event" style="float: left; width:20%; margin-left: 10px; margin-right: 10px">
+        <h1 align="center">Today's Events</h1>
+        <div id="today_calendar" style="float: left; position: absolute; top: 5%; width: inherit"></div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function() {
+            // page is now ready, initialize the calendar...
+
+            $('#month_calendar').fullCalendar({
+                // put your options and callbacks here
+
+                header: { left: 'prevYear,prev,next,nextYear',
+                    center: 'title, today',
+                    right: 'month,basicWeek' },
+
+                eventLimit: 6,
+                fixedWeekCount: false,
+                contentHeight: 800,
+                allDayDefault: true,
+
+                eventSources: [
+                    {
+                        events: [
+                            {% for shop in shops %}
+                                {
+                                    title: '시작:{{ shop.event_name }}',
+                                    start: '{{ shop.start_date|date:"c" }}',
+                                    url: '{{ shop.link_url }}'
+                                },
+                            {% endfor %}
+                        ],
+                        color : 'rgba(229, 229, 255, 0.6)',
+                        textColor : 'black'
+                    },{
+                        events: [
+                            {% for shop in shops %}
+                                {
+                                    title: '끝:{{ shop.event_name }}',
+                                    start: '{{ shop.end_date|date:"c" }}',
+                                    url: '{{ shop.link_url }}'
+                                },
+                            {% endfor %}
+                        ],
+                        color : 'rgba(235, 255, 229, 0.6)',
+                        textColor : 'black'
+
+                    }]
+            })
+
+
+            $('#today_calendar').fullCalendar({
+                // put your options and callbacks here
+
+                header: { left: '',
+                    center: '',
+                    right: '' },
+
+                defaultView: 'basicDay',
+                columnFormat: 'ddd M/D',
+                height: "auto",
+                allDayDefault: true,
+
+                eventSources: [
+                    {
+                        events: [
+                            {% for shop in shops %}
+                                {
+                                    title: '{{ shop.event_name }}',
+                                    start: '{{ shop.start_date|date:"c" }}',
+                                    end: '{{ shop.end_date|date:"c" }}',
+                                    url: '{{ shop.link_url }}'
+                                },
+                            {% endfor %}
+                        ],
+                        color : '#FCF8E3',
+                        textColor : 'black'
+
+                    }]
+            })
+
+        });
+
+    </script>
+
+
+{% endblock %}

@@ -21,7 +21,7 @@ from roadshops import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', Home.as_view()),
+    url(r'^$', views.home),  # Home.as_view()),
     url(r'^first/(?P<num>[0-9]{4})/(?P<num2>[0-9]{2})/$', views.home),
     url(r'^temp/', views.temp),
 ]
