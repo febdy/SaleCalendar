@@ -23,6 +23,12 @@
                     center: 'title, today',
                     right: 'month,basicWeek' },
 
+                views: {
+                    week: {
+                        eventLimit : false
+                    }
+                },
+
                 eventLimit: 6,
                 fixedWeekCount: false,
                 contentHeight: 800,
@@ -35,10 +41,17 @@
                                 {
                                     title: '시작:{{ shop.event_name }}',
                                     start: '{{ shop.start_date|date:"c" }}',
-                                    url: '{{ shop.link_url }}'
+                                    url: '{{ shop.link_url }}',
+                                    {% if shop.roadshop_name == 'ETUDE_HOUSE' %}
+                                        color : 'rgba(255, 153, 255, 0.4)',
+                                    {% elif shop.roadshop_name == 'SKIN_FOOD' %}
+                                        color : 'rgba(153, 153, 102, 0.4)'
+                                    {% endif %}
                                 },
+
                             {% endfor %}
                         ],
+
                         color : 'rgba(229, 229, 255, 0.6)',
                         textColor : 'black'
                     },{
@@ -47,7 +60,12 @@
                                 {
                                     title: '끝:{{ shop.event_name }}',
                                     start: '{{ shop.end_date|date:"c" }}',
-                                    url: '{{ shop.link_url }}'
+                                    url: '{{ shop.link_url }}',
+                                    {% if shop.roadshop_name == 'ETUDE_HOUSE' %}
+                                        color : 'rgba(255, 153, 255, 0.7)',
+                                    {% elif shop.roadshop_name == 'SKIN_FOOD' %}
+                                        color : 'rgba(153, 153, 102, 0.7)'
+                                    {% endif %}
                                 },
                             {% endfor %}
                         ],
@@ -75,15 +93,22 @@
                         events: [
                             {% for shop in shops %}
                                 {
-                                    title: '{{ shop.event_name }}',
+                                    {% if shop.roadshop_name == 'ETUDE_HOUSE' %}
+                                        title: 'ETUDE:{{ shop.event_name }}',
+                                        color : 'rgba(255, 153, 255, 0.4)',
+                                    {% elif shop.roadshop_name == 'SKIN_FOOD' %}
+                                        title: 'SKINFOOD:{{ shop.event_name }}',
+                                        color : 'rgba(153, 153, 102, 0.4)',
+                                    {% endif %}
+
                                     start: '{{ shop.start_date|date:"c" }}',
                                     end: '{{ shop.end_date|date:"c" }}',
-                                    url: '{{ shop.link_url }}'
+                                    url: '{{ shop.link_url }}',
                                 },
                             {% endfor %}
                         ],
                         color : '#FCF8E3',
-                        textColor : 'black'
+                        textColor : 'black',
 
                     }]
             })
