@@ -8,12 +8,16 @@ class Roadshops(models.Model):
     THE_FACE_SHOP = 'THE_FACE_SHOP'
     SKIN_FOOD = 'SKIN_FOOD'
     MISSHA = 'MISSHA'
+    ARITAUM = 'ARITAUM'
+    INNISFREE = 'INNISFREE'
 
     ROADSHOP_CHOICE = (
         (ETUDE, 'ETUDE_HOUSE'),
         (THE_FACE_SHOP, 'THE_FACE_SHOP'),
         (SKIN_FOOD, 'SKIN_FOOD'),
         (MISSHA, 'MISSHA'),
+        (ARITAUM, 'ARITAUM'),
+        (INNISFREE, 'INNISFREE')
     )
 
     event_name = models.CharField(max_length=200)
