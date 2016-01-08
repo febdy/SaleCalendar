@@ -47,7 +47,9 @@
                                     {% elif shop.roadshop_name == 'SKIN_FOOD' %}
                                         color : 'rgba(153, 153, 102, 0.4)',
                                     {% elif shop.roadshop_name == 'ARITUAM' %}
-                                        color : 'rgba(255, 255, 255, 0.4)'
+                                        color : 'rgba(255, 255, 255, 0.4)',
+                                    {% elif shop.roadshop_name == 'INNISFREE' %}
+                                        color : 'rgba(000, 255, 102, 0.4)'
                                     {% endif %}
                                 },
 
@@ -59,7 +61,8 @@
                     },{
                         events: [
                             {% for shop in shops %}
-                                {
+                                {% if shop.end_date != null %}
+                                    {
                                     title: '끝:{{ shop.event_name }}',
                                     start: '{{ shop.end_date|date:"c" }}',
                                     url: '{{ shop.link_url }}',
@@ -68,9 +71,12 @@
                                     {% elif shop.roadshop_name == 'SKIN_FOOD' %}
                                         color : 'rgba(153, 153, 102, 0.7)',
                                     {% elif shop.roadshop_name == 'ARITUAM' %}
-                                        color : 'rgba(255, 255, 255, 0.9)'
+                                        color : 'rgba(255, 255, 255, 0.9)',
+                                    {% elif shop.roadshop_name == 'INNISFREE' %}
+                                        color : 'rgba(000, 255, 102, 0.7)'
                                     {% endif %}
-                                },
+                                    },
+                                {% endif %}
                             {% endfor %}
                         ],
                         color : 'rgba(235, 255, 229, 0.6)',
@@ -106,6 +112,9 @@
                                     {% elif shop.roadshop_name == 'ARITAUM' %}
                                         title: 'ARITAUM:{{ shop.event_name }}',
                                         color : 'rgba(255, 255, 255, 0.7)',
+                                    {% elif shop.roadshop_name == 'INNISFREE' %}
+                                        title: 'INNISFREE:{{ shop.event_name }}',
+                                        color : 'rgba(000, 255, 102, 0.4)',
                                     {% endif %}
 
                                     start: '{{ shop.start_date|date:"c" }}',

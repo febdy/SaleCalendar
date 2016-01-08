@@ -20,7 +20,9 @@ def home(request, num=None, num2=None):
     etude()
     skinfood()
     aritaum()
+    innisfree()
     context = print_shops()
+
     return render_to_response('main.html', context)
 
 
@@ -126,12 +128,29 @@ def aritaum():
 
 
 def innisfree():
-    soup = read_url('http://www.innisfree.co.kr/Event.do?eventCl=1&procStat=2&channelTyp=&pageNo=1')
+    soup = read_url('http://www.innisfree.co.kr/Event.do')
+
+    innisfree_save(soup)
+
+    paging = soup.find('div', 'paging')
+
+    pages = paging.find_all('a')
+
+    for page in pages:
+        if page.get('class') == ['first']:
+            continue
+        elif page.get('class') == ['last']:
+            break
+        page_url = 'http://www.innisfree.co.kr'+page.get('href')
+        soup = read_url(page_url)
+        innisfree_save(soup)
+
+
+def innisfree_save(soup):
+    eventlist = []
 
     templist = soup.find('div', 'eventList')
     ul_tag = templist.contents[1]
-
-    eventlist = []
 
     for event in ul_tag.contents:
         if event != '\n':
