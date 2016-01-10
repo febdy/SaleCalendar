@@ -21,6 +21,7 @@ def home(request, num=None, num2=None):
     skinfood()
     aritaum()
     innisfree()
+    thefaceshop()
     context = print_shops()
 
     return render_to_response('main.html', context)
@@ -32,6 +33,7 @@ def temp(request):
     skinfood()
     aritaum()
     innisfree()
+    thefaceshop()
     context = print_shops()
 
     return render_to_response('temp.html', context)
@@ -71,11 +73,11 @@ def etude():
 def skinfood():
     soup = read_url('http://www.theskinfood.com/event/eventList.do')
 
-    templist = soup.find('ul', 'eventList passed')
+    ul_tag = soup.find('ul', 'eventList passed')
 
     eventlist = []
 
-    for event in templist.contents:
+    for event in ul_tag.contents:
         if event != '\n':
             eventlist.append(event)
 
@@ -176,6 +178,58 @@ def innisfree_save(soup):
         temp.start_date = datetime.strptime(start_date, "%Y-%m-%d")
         if end_date[0] == '2':
            temp.end_date = datetime.strptime(end_date + " 23:59:59", "%Y-%m-%d %H:%M:%S")
+        temp.save()
+
+
+def thefaceshop():
+    soup = read_url('http://www.thefaceshop.com/mall/event/event.jsp')
+
+    thefaceshop_save(soup)
+
+    paging = soup.find('div', 'paging_type1')
+
+    pages = paging.find_all('a')
+
+    for page in pages:
+        page_url = 'http://www.thefaceshop.com/mall/event/'+page.get('href')
+        soup = read_url(page_url)
+        thefaceshop_save(soup)
+
+        if page.get('class') == ['cnt']:
+            break
+
+
+def thefaceshop_save(soup):
+    eventlist = []
+
+    ul_tag = soup.find('ul', 'ComEventList')
+
+    for event in ul_tag.contents:
+        if event != '\n':
+            eventlist.append(event)
+
+    for event in eventlist:
+        temp = Roadshops()
+
+        if type(event.find('p')) == int:
+            continue
+
+        period = event.find('p').get_text()
+        start_date = period.split(' ~ ')[0]
+        end_date = period.split(' ~ ')[1]
+
+        temp.event_name = event.find('span', 's_tit7').contents[1]
+        temp.roadshop_name = Roadshops.THE_FACE_SHOP
+        temp.image_url = event.find('img').get('src')
+
+        if event.find('a').get('href')[0] == 'h':
+            temp.link_url = event.find('a').get('href')
+        elif event.find('a').get('href')[0] != 'h':
+            temp.link_url = 'http://www.thefaceshop.com/mall/event/'+event.find('a').get('href')
+
+        temp.start_date = datetime.strptime(start_date, "%Y.%m.%d")
+        if end_date[0] == '2':
+           temp.end_date = datetime.strptime(end_date + " 23:59:59", "%Y.%m.%d  %H:%M:%S")
         temp.save()
 
 
