@@ -22,6 +22,7 @@ def home(request, num=None, num2=None):
     aritaum()
     innisfree()
     thefaceshop()
+    thesaem()
     context = print_shops()
 
     return render_to_response('main.html', context)
@@ -34,6 +35,7 @@ def temp(request):
     aritaum()
     innisfree()
     thefaceshop()
+    thesaem()
     context = print_shops()
 
     return render_to_response('temp.html', context)
@@ -233,9 +235,46 @@ def thefaceshop_save(soup):
         temp.save()
 
 
+def thesaem():
+    soup = read_url('http://www.thesaemcosmetic.com/event/now_event_list')
+
+    eventlist = []
+
+    templist = soup.find('div', 'event-list')
+    ul_tag = templist.contents[1]
+
+    for event in ul_tag.contents:
+        if event != '\n':
+            eventlist.append(event)
+
+    for event in eventlist:
+        temp = Roadshops()
+
+        if type(event.find('span')) == int:
+            continue
+
+        period = event.find('span').get_text()
+        start_date = period.split(' ~ ')[0]
+        end_date = period.split(' ~ ')[1]
+
+        temp.event_name = event.find('h5').get_text()
+        temp.roadshop_name = Roadshops.THE_SAEM
+        temp.image_url = 'http://www.thesaemcosmetic.com'+event.find('img').get('src')
+
+        if event.find('a').get('href')[0] == '/':
+            temp.link_url = 'http://www.thesaemcosmetic.com/event'+event.find('a').get('href')
+        elif event.find('a').get('href')[0] != '/':
+            temp.link_url = event.find('a').get('href')
+
+        temp.start_date = datetime.strptime(start_date, "%Y-%m-%d")
+        if end_date[0] == '2':
+           temp.end_date = datetime.strptime(end_date + " 23:59:59", "%Y-%m-%d %H:%M:%S")
+        temp.save()
+
+
 def read_url(url):
     f = urllib.request.urlopen(url)
-    text = f.read().decode('utf-8')
+    text = f.read().decode(f.info().get_param('charset'))
     soup = BeautifulSoup(text)
     return soup
 

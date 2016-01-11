@@ -51,7 +51,10 @@
                                     {% elif shop.roadshop_name == 'INNISFREE' %}
                                         color : 'rgba(000, 255, 102, 0.4)',
                                     {% elif shop.roadshop_name == 'THE_FACE_SHOP' %}
-                                        color : 'rgba(051, 102, 102, 0.3)'                                    {% endif %}
+                                        color : 'rgba(051, 102, 102, 0.3)',
+                                    {% elif shop.roadshop_name == 'THE_SAEM' %}
+                                        color : 'rgba(000, 255, 255, 0.4)'
+                                    {% endif %}
                                 },
 
                             {% endfor %}
@@ -76,7 +79,9 @@
                                     {% elif shop.roadshop_name == 'INNISFREE' %}
                                         color : 'rgba(000, 255, 102, 0.7)',
                                     {% elif shop.roadshop_name == 'THE_FACE_SHOP' %}
-                                        color : 'rgba(051, 102, 102, 0.5)'
+                                        color : 'rgba(051, 102, 102, 0.5)',
+                                    {% elif shop.roadshop_name == 'THE_SAEM' %}
+                                        color : 'rgba(000, 255, 255, 0.7)'
                                     {% endif %}
                                     },
                                 {% endif %}
@@ -121,6 +126,9 @@
                                     {% elif shop.roadshop_name == 'THE_FACE_SHOP' %}
                                         title: 'THEFACESHOP:{{ shop.event_name }}',
                                         color : 'rgba(051, 102, 102, 0.4)',
+                                    {% elif shop.roadshop_name == 'THE_SAEM' %}
+                                        title: 'THESAEM:{{ shop.event_name }}',
+                                        color : 'rgba(000, 255, 255, 0.4)',
                                     {% endif %}
 
                                     start: '{{ shop.start_date|date:"c" }}',
