@@ -12,6 +12,7 @@ class Roadshops(models.Model):
     INNISFREE = 'INNISFREE'
     THE_SAEM = 'THE_SAEM'
     ITS_SKIN = 'ITS_SKIN'
+    NATURE_REPUBLIC = 'NATURE_REPUBLIC'
 
     ROADSHOP_CHOICE = (
         (ETUDE, 'ETUDE_HOUSE'),
@@ -21,7 +22,8 @@ class Roadshops(models.Model):
         (ARITAUM, 'ARITAUM'),
         (INNISFREE, 'INNISFREE'),
         (THE_SAEM, 'THE_SAEM'),
-        (ITS_SKIN, 'ITS_SKIN')
+        (ITS_SKIN, 'ITS_SKIN'),
+        (NATURE_REPUBLIC, 'NATURE_REPUBLIC')
     )
 
     event_name = models.CharField(max_length=200)

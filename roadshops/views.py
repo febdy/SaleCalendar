@@ -24,6 +24,7 @@ def home(request, num=None, num2=None):
     thefaceshop()
     thesaem()
     itsskin()
+    naturerepublic()
     context = print_shops()
 
     return render_to_response('main.html', context)
@@ -38,6 +39,7 @@ def temp(request):
     thefaceshop()
     thesaem()
     itsskin()
+    naturerepublic()
     context = print_shops()
 
     return render_to_response('temp.html', context)
@@ -302,6 +304,30 @@ def itsskin():
         temp.roadshop_name = Roadshops.ITS_SKIN
         temp.image_url = 'http://www.itsskin.com'+event.find('img').get('src')
         temp.link_url = 'http://www.itsskin.com/event/'+event.find('a').get('href')
+
+        temp.start_date = datetime.strptime(start_date, "%Y.%m.%d")
+        if end_date[0] == '2':
+           temp.end_date = datetime.strptime(end_date + " 23:59:59", "%Y.%m.%d %H:%M:%S")
+        temp.save()
+
+
+def naturerepublic():
+    soup = read_url('http://m.naturerepublic.com/event/ing')
+
+    eventlist = soup.find_all('div', 'event_wrap')
+
+    for event in eventlist:
+        temp = Roadshops()
+
+        period = event.find('div', 'event_date').get_text()
+        split_date = period.split('\r\n\t\t\t\t\t\t')[1]
+        start_date = split_date.split(' ~ ')[0]
+        end_date = split_date.split(' ~ ')[1]
+
+        temp.event_name = event.find('div', 'event_tit').get_text()
+        temp.roadshop_name = Roadshops.NATURE_REPUBLIC
+        temp.image_url = event.find('img').get('src')
+        temp.link_url = 'http://m.naturerepublic.com'+event.find('a').get('href')
 
         temp.start_date = datetime.strptime(start_date, "%Y.%m.%d")
         if end_date[0] == '2':
