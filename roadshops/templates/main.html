@@ -57,7 +57,9 @@
                                     {% elif shop.roadshop_name == 'ITS_SKIN' %}
                                         color : 'rgba(152, 255, 255, 0.4)',
                                     {% elif shop.roadshop_name == 'NATURE_REPUBLIC' %}
-                                        color : 'rgba(102, 102, 000, 0.3)'
+                                        color : 'rgba(102, 102, 000, 0.3)',
+                                    {% elif shop.roadshop_name == 'TONYMOLY' %}
+                                        color : 'rgba(153, 153, 153, 0.4)'
                                     {% endif %}
                                 },
 
@@ -89,7 +91,9 @@
                                     {% elif shop.roadshop_name == 'ITS_SKIN' %}
                                         color : 'rgba(152, 255, 255, 0.7)',
                                     {% elif shop.roadshop_name == 'NATURE_REPUBLIC' %}
-                                        color : 'rgba(102, 102, 000, 0.6)'
+                                        color : 'rgba(102, 102, 000, 0.6)',
+                                    {% elif shop.roadshop_name == 'TONYMOLY' %}
+                                        color : 'rgba(153, 153, 153, 0.7)'
                                     {% endif %}
                                     },
                                 {% endif %}
@@ -143,6 +147,9 @@
                                     {% elif shop.roadshop_name == 'NATURE_REPUBLIC' %}
                                         title: 'NATURE:{{ shop.event_name }}',
                                         color : 'rgba(102, 102, 000, 0.3)',
+                                    {% elif shop.roadshop_name == 'TONYMOLY' %}
+                                        title: 'NATURE:{{ shop.event_name }}',
+                                        color : 'rgba(153, 153, 153, 0.4)',
                                     {% endif %}
 
                                     start: '{{ shop.start_date|date:"c" }}',

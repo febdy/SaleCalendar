@@ -17,6 +17,7 @@ class Home(TemplateView):
 
 def home(request, num=None, num2=None):
     Roadshops.objects.all().delete()
+
     etude()
     skinfood()
     aritaum()
@@ -25,6 +26,8 @@ def home(request, num=None, num2=None):
     thesaem()
     itsskin()
     naturerepublic()
+    tonymoly()
+
     context = print_shops()
 
     return render_to_response('main.html', context)
@@ -39,7 +42,9 @@ def temp(request):
     thefaceshop()
     thesaem()
     itsskin()
+    tonymoly()
     naturerepublic()
+
     context = print_shops()
 
     return render_to_response('temp.html', context)
@@ -224,7 +229,7 @@ def thefaceshop_save(soup):
         start_date = period.split(' ~ ')[0]
         end_date = period.split(' ~ ')[1]
 
-        temp.event_name = event.find('span', 's_tit7').contents[1]
+        temp.event_name = event.find('span', 's_tit7').contents[1].strip()
         temp.roadshop_name = Roadshops.THE_FACE_SHOP
         temp.image_url = event.find('img').get('src')
 
@@ -332,6 +337,32 @@ def naturerepublic():
         temp.start_date = datetime.strptime(start_date, "%Y.%m.%d")
         if end_date[0] == '2':
            temp.end_date = datetime.strptime(end_date + " 23:59:59", "%Y.%m.%d %H:%M:%S")
+        temp.save()
+
+
+def tonymoly():
+    soup = read_url('http://www.etonymoly.com/html/event/event_list.asp?board=event&board_group=1')
+
+    eventlist = soup.find_all('div', 'area')
+
+    for event in eventlist:
+        temp = Roadshops()
+
+        period = event.find('li').get_text()
+        remove_text = period.split('\r')[1]
+        split_date = remove_text.split('\n\t\t\t\t\t\t\t\t\t\t\t')[1]
+        start_date = split_date.split('~')[0]
+        end_date = split_date.split('~')[1]
+
+        temp.event_name = event.find('span').get_text().strip()
+        temp.roadshop_name = Roadshops.TONYMOLY
+        temp.image_url = 'http://www.etonymoly.com'+event.find('img').get('src')
+        get_link=event.find('a').get('href')
+        temp.link_url = 'http://www.etonymoly.com/html/event/'+get_link.split('\'')[1]
+
+        temp.start_date = datetime.strptime(start_date, "%Y-%m-%d")
+        if end_date[0] == '2':
+           temp.end_date = datetime.strptime(end_date + " 23:59:59", "%Y-%m-%d %H:%M:%S")
         temp.save()
 
 

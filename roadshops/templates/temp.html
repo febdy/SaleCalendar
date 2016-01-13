@@ -5,6 +5,18 @@
     <title>로드샵캘린더</title>
 </head>
 <body>
+<div id="tonymoly" style="float: left">
+    <h1>TONYMOLY</h1>
+    {% for shop in shops %}
+        {% if shop.roadshop_name == 'TONYMOLY' %}
+            <a href="{{ shop.link_url }}"><img src="{{ shop.image_url }}" /></a></br>
+            event_name : {{ shop.event_name }} </br>
+            describe : {{ shop.describe }} </br>
+            start_date : {{ shop.start_date|date:"Y/m/d(D)" }} </br>
+            end_date : {{ shop.end_date|date:"Y/m/d(D)" }} </br></p>
+        {% endif %}
+    {% endfor %}
+</div>
 <div id="naturerepublic" style="float: left">
     <h1>NATURE_REPUBLIC</h1>
     {% for shop in shops %}
