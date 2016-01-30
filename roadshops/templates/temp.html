@@ -105,6 +105,7 @@
     <h1>ARITAUM</h1>
     {% for shop in shops %}
         {% if shop.roadshop_name == 'ARITAUM' %}
+            <a href="{{ shop.link_url }}"><img src="{{ shop.image_url }}" /></a></br>
             event_name : {{ shop.event_name }} </br>
             describe : {{ shop.describe }} </br>
             start_date : {{ shop.start_date|date:"Y/m/d(D)" }} </br>

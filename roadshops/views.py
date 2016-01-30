@@ -9,7 +9,8 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 
 import urllib.request
-
+import json
+from io import StringIO
 
 class Home(TemplateView):
     template_name = 'main.html'
@@ -130,7 +131,10 @@ def aritaum():
 
         temp.event_name = event.find('span', 'desc').get_text()
         temp.roadshop_name = Roadshops.ARITAUM
-        #  temp.image_url = event.find('img').get('src')
+        get_image_url = event.find('a').get('style')
+        image_url = get_image_url.split('(')[1]
+        image_url = image_url.split(')')[0]
+        temp.image_url = image_url
         """if event.find('a').get('href')[0] == '/':
             temp.link_url = 'http://www.etude.co.kr'+event.find('a').get('href')
         elif event.find('a').get('href')[0] != '/':

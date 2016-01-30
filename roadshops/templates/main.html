@@ -4,17 +4,195 @@
 {% endblock %}
 
 {% block content %}
-    <div id="month_calendar" style="float: left; width:70%; margin-left: 5%"></div>
-    <div id="today_event" style="float: left; width:20%; margin-left: 10px; margin-right: 10px">
+    <div id="check">
+        <form id="roadshop_check">
+            <input type="checkbox" id="all" class="check-all" value="ALEL" checked><label>ALL</label><p>
+            <input type="checkbox" id="chk_etude" class="roadshop" checked><label id="label_etude">ETUDE HOUSE</label><p>
+            <input type="checkbox" id="chk_skinfood" class="roadshop" checked><label id="label_skinfood">SKINFOOD</label><p>
+            <input type="checkbox" id="chk_aritaum" class="roadshop" checked><label id="label_aritaum">ARITAUM</label><p>
+            <input type="checkbox" id="chk_innisfree" class="roadshop" checked><label id="label_innisfree">INNISFREE</label><p>
+            <input type="checkbox" id="chk_thefaceshop" class="roadshop" checked><label id="label_thefaceshop">THE FACE SHOP</label><p>
+            <input type="checkbox" id="chk_thesaem" class="roadshop" checked><label id="label_thesaem">THE SAEM</label><p>
+            <input type="checkbox" id="chk_itsskin" class="roadshop" checked><label id="label_itsskin">IT'S SKIN</label><p>
+            <input type="checkbox" id="chk_nature" class="roadshop" checked><label id="label_nature">NATURE REPUBLIC</label><p>
+            <input type="checkbox" id="chk_tonymoly" class="roadshop" checked><label id="label_tonymoly">TONYMOLY</label><p>
+        </form>
+    </div>
+    <div id="month_calendar"></div>
+    <div id="today_event">
         <h1 align="center">Today's Events</h1>
-        <div id="today_calendar" style="float: left; position: absolute; top: 5%; width: inherit"></div>
+        <div id="today_calendar"></div>
     </div>
 {% endblock %}
 
 {% block javascript %}
     <script>
-        $(document).ready(function() {
+
+        function event_list(){
+            this.events = [];
+            this.color = 'rgba(229, 229, 255, 0.6)';
+            this.textColor = 'black';
+        }
+
+        var etude = new event_list();
+        var skinfood = new event_list();
+        var aritaum = new event_list();
+        var innisfree = new event_list();
+        var thefaceshop = new event_list();
+        var thesaem = new event_list();
+        var itsskin = new event_list();
+        var nature = new event_list();
+        var tonymoly = new event_list();
+
+        {% for shop in shops %}
+            {
+
+                var start_info = {
+                    title : 'none',
+                    start : '',
+                    url : '',
+                    color : ''
+                };
+
+                var end_info = {
+                    title : 'none',
+                    start : '',
+                    url : '',
+                    color : ''
+                };
+
+                start_info.title = '시작:{{ shop.event_name }}';
+                start_info.start = '{{ shop.start_date|date:"c" }}';
+
+                    {% if shop.end_date != null %}{
+                        end_info.title = '끝:{{ shop.event_name }}';
+                        end_info.start = '{{ shop.end_date|date:"c" }}';
+
+                        start_info.url = end_info.url = '{{ shop.link_url }}';
+
+                        {% if shop.roadshop_name == 'ETUDE_HOUSE' %}
+                            start_info.color = 'rgba(255, 153, 255, 0.4)';
+                            end_info.color = 'rgba(255, 153, 255, 0.7)';
+
+                            etude.events.push(start_info);
+                            etude.events.push(end_info);
+
+                        {% elif shop.roadshop_name == 'SKIN_FOOD' %}
+                            start_info.color = 'rgba(153, 204, 051, 0.4)';
+                            end_info.color = 'rgba(153, 204, 051, 0.7)';
+
+                            skinfood.events.push(start_info);
+                            skinfood.events.push(end_info);
+
+                        {% elif shop.roadshop_name == 'ARITAUM' %}
+                            start_info.color = 'rgba(255, 255, 051, 0.4)';
+                            end_info.color = 'rgba(255, 255, 051, 0.9)';
+
+                            aritaum.events.push(start_info);
+                            aritaum.events.push(end_info);
+
+                        {% elif shop.roadshop_name == 'INNISFREE' %}
+                            start_info.color = 'rgba(000, 255, 102, 0.4)';
+                            end_info.color = 'rgba(000, 255, 102, 0.7)';
+
+                            innisfree.events.push(start_info);
+                            innisfree.events.push(end_info);
+
+                        {% elif shop.roadshop_name == 'THE_FACE_SHOP' %}
+                            start_info.color = 'rgba(051, 102, 102, 0.3)';
+                            end_info.color = 'rgba(051, 102, 102, 0.5)';
+
+                            thefaceshop.events.push(start_info);
+                            thefaceshop.events.push(end_info);
+
+                        {% elif shop.roadshop_name == 'THE_SAEM' %}
+                            start_info.color = 'rgba(000, 255, 255, 0.4)';
+                            end_info.color = 'rgba(000, 255, 255, 0.7)';
+
+                            thesaem.events.push(start_info);
+                            thesaem.events.push(end_info);
+
+                        {% elif shop.roadshop_name == 'ITS_SKIN' %}
+                            start_info.color = 'rgba(152, 255, 255, 0.4)';
+                            end_info.color = 'rgba(152, 255, 255, 0.7)';
+
+                            itsskin.events.push(start_info);
+                            itsskin.events.push(end_info);
+
+                        {% elif shop.roadshop_name == 'NATURE_REPUBLIC' %}
+                            start_info.color = 'rgba(153, 153, 000, 0.4)';
+                            end_info.color = 'rgba(153, 153, 000, 0.7)';
+
+                            nature.events.push(start_info);
+                            nature.events.push(end_info);
+
+                        {% elif shop.roadshop_name == 'TONYMOLY' %}
+                            start_info.color = 'rgba(153, 153, 153, 0.4)';
+                            end_info.color = 'rgba(153, 153, 153, 0.7)';
+
+                            tonymoly.events.push(start_info);
+                            tonymoly.events.push(end_info);
+
+                        {% endif %}
+
+                        }
+                    {% endif %}
+
+            }
+        {% endfor %}
+
+        function shop_list(shop_name){
+            switch(shop_name){
+                case 'chk_etude':
+                    shop_name = etude; break;
+                case 'chk_skinfood' :
+                    shop_name = skinfood; break;
+                case 'chk_aritaum' :
+                    shop_name = aritaum; break;
+                case 'chk_innisfree':
+                    shop_name = innisfree; break;
+                case 'chk_thefaceshop':
+                    shop_name = thefaceshop; break;
+                case 'chk_thesaem':
+                    shop_name = thesaem; break;
+                case 'chk_itsskin':
+                    shop_name = itsskin; break;
+                case 'chk_nature':
+                    shop_name = nature; break;
+                case 'chk_tonymoly':
+                    shop_name = tonymoly; break;
+                    dafault: break;
+            }
+
+            return shop_name
+        }
+
+        var checkArr = [];
+
+        $(document).ready(function(){
             // page is now ready, initialize the calendar...
+
+            $('.check-all').click(function(){
+                $('.roadshop').prop('checked', this.checked);
+            });
+
+            function checkboxArr(){
+                checkArr = [];
+                $("input[id^='chk_']:checked").each(function(){
+                    checkArr.push($(this).prop("id"))
+                });
+
+                return checkArr
+            }
+
+            function getChkbox(){
+                checkboxArr();
+
+                $(checkArr).each(function(i){
+                    var shop_name = shop_list(checkArr[i]);
+                    $('#month_calendar').fullCalendar('addEventSource', shop_name);
+                })
+            }
 
             $('#month_calendar').fullCalendar({
                 // put your options and callbacks here
@@ -34,77 +212,23 @@
                 contentHeight: 800,
                 allDayDefault: true,
 
-                eventSources: [
-                    {
-                        events: [
-                            {% for shop in shops %}
-                                {
-                                    title: '시작:{{ shop.event_name }}',
-                                    start: '{{ shop.start_date|date:"c" }}',
-                                    url: '{{ shop.link_url }}',
-                                    {% if shop.roadshop_name == 'ETUDE_HOUSE' %}
-                                        color : 'rgba(255, 153, 255, 0.4)',
-                                    {% elif shop.roadshop_name == 'SKIN_FOOD' %}
-                                        color : 'rgba(153, 153, 102, 0.4)',
-                                    {% elif shop.roadshop_name == 'ARITUAM' %}
-                                        color : 'rgba(255, 255, 255, 0.4)',
-                                    {% elif shop.roadshop_name == 'INNISFREE' %}
-                                        color : 'rgba(000, 255, 102, 0.4)',
-                                    {% elif shop.roadshop_name == 'THE_FACE_SHOP' %}
-                                        color : 'rgba(051, 102, 102, 0.3)',
-                                    {% elif shop.roadshop_name == 'THE_SAEM' %}
-                                        color : 'rgba(000, 255, 255, 0.4)',
-                                    {% elif shop.roadshop_name == 'ITS_SKIN' %}
-                                        color : 'rgba(152, 255, 255, 0.4)',
-                                    {% elif shop.roadshop_name == 'NATURE_REPUBLIC' %}
-                                        color : 'rgba(102, 102, 000, 0.3)',
-                                    {% elif shop.roadshop_name == 'TONYMOLY' %}
-                                        color : 'rgba(153, 153, 153, 0.4)'
-                                    {% endif %}
-                                },
+                eventSources: []
+            });
 
-                            {% endfor %}
-                        ],
+            getChkbox();
 
-                        color : 'rgba(229, 229, 255, 0.6)',
-                        textColor : 'black'
-                    },{
-                        events: [
-                            {% for shop in shops %}
-                                {% if shop.end_date != null %}
-                                    {
-                                    title: '끝:{{ shop.event_name }}',
-                                    start: '{{ shop.end_date|date:"c" }}',
-                                    url: '{{ shop.link_url }}',
-                                    {% if shop.roadshop_name == 'ETUDE_HOUSE' %}
-                                        color : 'rgba(255, 153, 255, 0.7)',
-                                    {% elif shop.roadshop_name == 'SKIN_FOOD' %}
-                                        color : 'rgba(153, 153, 102, 0.7)',
-                                    {% elif shop.roadshop_name == 'ARITUAM' %}
-                                        color : 'rgba(255, 255, 255, 0.9)',
-                                    {% elif shop.roadshop_name == 'INNISFREE' %}
-                                        color : 'rgba(000, 255, 102, 0.7)',
-                                    {% elif shop.roadshop_name == 'THE_FACE_SHOP' %}
-                                        color : 'rgba(051, 102, 102, 0.5)',
-                                    {% elif shop.roadshop_name == 'THE_SAEM' %}
-                                        color : 'rgba(000, 255, 255, 0.7)',
-                                    {% elif shop.roadshop_name == 'ITS_SKIN' %}
-                                        color : 'rgba(152, 255, 255, 0.7)',
-                                    {% elif shop.roadshop_name == 'NATURE_REPUBLIC' %}
-                                        color : 'rgba(102, 102, 000, 0.6)',
-                                    {% elif shop.roadshop_name == 'TONYMOLY' %}
-                                        color : 'rgba(153, 153, 153, 0.7)'
-                                    {% endif %}
-                                    },
-                                {% endif %}
-                            {% endfor %}
-                        ],
-                        color : 'rgba(235, 255, 229, 0.6)',
-                        textColor : 'black'
+            $('#roadshop_check').change(function() {
+                $('#month_calendar').fullCalendar('removeEvents');
 
-                    }]
-            })
+                getChkbox();
 
+                if(checkArr.length<9){
+                    $('#all').prop('checked', false)
+                }
+                else{
+                    $('#all').prop('checked', true)
+                }
+            });
 
             $('#today_calendar').fullCalendar({
                 // put your options and callbacks here
@@ -117,6 +241,7 @@
                 columnFormat: 'ddd M/D',
                 height: "auto",
                 allDayDefault: true,
+                eventOrder: 'reverse',
 
                 eventSources: [
                     {
@@ -148,7 +273,7 @@
                                         title: 'NATURE:{{ shop.event_name }}',
                                         color : 'rgba(102, 102, 000, 0.3)',
                                     {% elif shop.roadshop_name == 'TONYMOLY' %}
-                                        title: 'NATURE:{{ shop.event_name }}',
+                                        title: 'TONYMOLY:{{ shop.event_name }}',
                                         color : 'rgba(153, 153, 153, 0.4)',
                                     {% endif %}
 
@@ -162,11 +287,10 @@
                         textColor : 'black',
 
                     }]
-            })
+            });
 
         });
 
     </script>
-
 
 {% endblock %}
