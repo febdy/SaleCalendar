@@ -1,0 +1,204 @@
+[2016-02-22 10:21:25,608: WARNING/MainProcess] /home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/apps/worker.py:162: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+[2016-02-22 10:21:25,631: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-02-22 10:21:25,640: INFO/MainProcess] mingle: searching for neighbors
+[2016-02-22 10:21:26,649: INFO/MainProcess] mingle: all alone
+[2016-02-22 10:21:26,668: WARNING/MainProcess] /home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/fixups/django.py:265: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+
+[2016-02-22 10:21:26,668: WARNING/MainProcess] w1@ldy ready.
+[2016-02-22 18:05:27,781: WARNING/MainProcess] consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/worker/consumer.py", line 279, in start
+    blueprint.start(self)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/bootsteps.py", line 123, in start
+    step.start(parent)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/worker/consumer.py", line 838, in start
+    c.loop(*c.loop_args())
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/worker/loops.py", line 76, in asynloop
+    next(loop)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/kombu/async/hub.py", line 279, in create_loop
+    item()
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/utils.py", line 42, in __call__
+    self.set_error_state(exc)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/utils.py", line 39, in __call__
+    **dict(self.kwargs, **kwargs) if self.kwargs else kwargs
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/kombu/connection.py", line 275, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/kombu/transport/pyamqp.py", line 95, in drain_events
+    return connection.drain_events(**kwargs)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/connection.py", line 324, in drain_events
+    return amqp_method(channel, args)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/connection.py", line 527, in _close
+    self._x_close_ok()
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/connection.py", line 555, in _x_close_ok
+    self._send_method((10, 51))
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/abstract_channel.py", line 56, in _send_method
+    self.channel_id, method_sig, args, content,
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/method_framing.py", line 221, in write_method
+    write_frame(1, channel, payload)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/transport.py", line 182, in write_frame
+    frame_type, channel, size, payload, 0xce,
+ConnectionResetError: [Errno 104] Connection reset by peer
+[2016-02-22 18:05:27,803: ERROR/MainProcess] consumer: Cannot connect to amqp://guest:**@127.0.0.1:5672//: [Errno 111] Connection refused.
+Trying again in 2.00 seconds...
+
+[2016-02-23 11:10:53,449: WARNING/MainProcess] /home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/apps/worker.py:162: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+[2016-02-23 11:10:53,473: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-02-23 11:10:53,482: INFO/MainProcess] mingle: searching for neighbors
+[2016-02-23 11:10:54,489: INFO/MainProcess] mingle: all alone
+[2016-02-23 11:10:54,501: WARNING/MainProcess] /home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/fixups/django.py:265: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+
+[2016-02-23 11:10:54,501: WARNING/MainProcess] w1@ldy ready.
+[2016-02-24 05:22:21,377: WARNING/MainProcess] consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/worker/consumer.py", line 279, in start
+    blueprint.start(self)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/bootsteps.py", line 123, in start
+    step.start(parent)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/worker/consumer.py", line 838, in start
+    c.loop(*c.loop_args())
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/worker/loops.py", line 76, in asynloop
+    next(loop)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/kombu/async/hub.py", line 279, in create_loop
+    item()
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/utils.py", line 42, in __call__
+    self.set_error_state(exc)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/utils.py", line 39, in __call__
+    **dict(self.kwargs, **kwargs) if self.kwargs else kwargs
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/kombu/connection.py", line 275, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/kombu/transport/pyamqp.py", line 95, in drain_events
+    return connection.drain_events(**kwargs)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/connection.py", line 324, in drain_events
+    return amqp_method(channel, args)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/connection.py", line 527, in _close
+    self._x_close_ok()
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/connection.py", line 555, in _x_close_ok
+    self._send_method((10, 51))
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/abstract_channel.py", line 56, in _send_method
+    self.channel_id, method_sig, args, content,
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/method_framing.py", line 221, in write_method
+    write_frame(1, channel, payload)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/transport.py", line 182, in write_frame
+    frame_type, channel, size, payload, 0xce,
+ConnectionResetError: [Errno 104] Connection reset by peer
+[2016-02-24 05:22:21,397: ERROR/MainProcess] consumer: Cannot connect to amqp://guest:**@127.0.0.1:5672//: [Errno 111] Connection refused.
+Trying again in 2.00 seconds...
+
+[2016-02-24 05:22:23,405: ERROR/MainProcess] consumer: Cannot connect to amqp://guest:**@127.0.0.1:5672//: [Errno 111] Connection refused.
+Trying again in 4.00 seconds...
+
+[2016-03-04 08:49:35,068: WARNING/MainProcess] /home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/apps/worker.py:162: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+[2016-03-04 08:49:35,093: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-03-04 08:49:35,101: INFO/MainProcess] mingle: searching for neighbors
+[2016-03-04 08:49:36,111: INFO/MainProcess] mingle: all alone
+[2016-03-04 08:49:36,131: WARNING/MainProcess] /home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/fixups/django.py:265: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+
+[2016-03-04 08:49:36,131: WARNING/MainProcess] w1@ldy ready.
+[2016-03-27 14:37:18,915: WARNING/MainProcess] consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/worker/consumer.py", line 279, in start
+    blueprint.start(self)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/bootsteps.py", line 123, in start
+    step.start(parent)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/worker/consumer.py", line 838, in start
+    c.loop(*c.loop_args())
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/celery/worker/loops.py", line 76, in asynloop
+    next(loop)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/kombu/async/hub.py", line 279, in create_loop
+    item()
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/utils.py", line 42, in __call__
+    self.set_error_state(exc)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/utils.py", line 39, in __call__
+    **dict(self.kwargs, **kwargs) if self.kwargs else kwargs
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/kombu/connection.py", line 275, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/kombu/transport/pyamqp.py", line 95, in drain_events
+    return connection.drain_events(**kwargs)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/connection.py", line 324, in drain_events
+    return amqp_method(channel, args)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/connection.py", line 527, in _close
+    self._x_close_ok()
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/connection.py", line 555, in _x_close_ok
+    self._send_method((10, 51))
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/abstract_channel.py", line 56, in _send_method
+    self.channel_id, method_sig, args, content,
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/method_framing.py", line 221, in write_method
+    write_frame(1, channel, payload)
+  File "/home/ldy/.pyenv/versions/3.5.0/envs/SaleCalendar/lib/python3.5/site-packages/amqp/transport.py", line 182, in write_frame
+    frame_type, channel, size, payload, 0xce,
+ConnectionResetError: [Errno 104] Connection reset by peer
+[2016-03-27 14:37:19,132: ERROR/MainProcess] consumer: Cannot connect to amqp://guest:**@127.0.0.1:5672//: [Errno 111] Connection refused.
+Trying again in 2.00 seconds...
+
+[2016-03-27 14:37:21,143: ERROR/MainProcess] consumer: Cannot connect to amqp://guest:**@127.0.0.1:5672//: [Errno 111] Connection refused.
+Trying again in 4.00 seconds...
+
+[2016-03-27 14:37:25,156: ERROR/MainProcess] consumer: Cannot connect to amqp://guest:**@127.0.0.1:5672//: [Errno 111] Connection refused.
+Trying again in 6.00 seconds...
+
+[2016-03-27 14:37:31,168: ERROR/MainProcess] consumer: Cannot connect to amqp://guest:**@127.0.0.1:5672//: [Errno 111] Connection refused.
+Trying again in 8.00 seconds...
+
+[2016-03-27 14:37:39,181: ERROR/MainProcess] consumer: Cannot connect to amqp://guest:**@127.0.0.1:5672//: [Errno 111] Connection refused.
+Trying again in 10.00 seconds...
+

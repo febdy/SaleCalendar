@@ -38,4 +38,6 @@ class Roadshops(models.Model):
     start_date = models.DateTimeField(null=True, blank="")
     end_date = models.DateTimeField(null=True, blank="")
     created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_active = models.CharField(max_length=20, default='N')
