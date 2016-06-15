@@ -5,7 +5,6 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.shortcuts import render_to_response
 from roadshops.models import Roadshops
-from datetime import datetime, timedelta, timezone
 
 
 class Home(TemplateView):

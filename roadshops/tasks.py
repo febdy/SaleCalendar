@@ -9,6 +9,7 @@ import urllib.request
 
 @app.task(name='tasks.readroadshops')
 def readroadshops():
+    check_event_active()
     etude()
     skinfood()
     aritaum()
