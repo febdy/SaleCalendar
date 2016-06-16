@@ -334,7 +334,7 @@ def naturerepublic():
         event_info.image_url = event.find('img').get('src')
         event_info.link_url = 'http://m.naturerepublic.com'+event.find('a').get('href')
 
-        now = datetime.utcnow()
+        now = datetime.utcnow()  # date : should be used OCR
         event_info.start_date = now
         event_info.is_active = 'Y'
 

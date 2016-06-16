@@ -61,14 +61,15 @@
                     color : ''
                 };
 
-                start_info.title = '시작:{{ shop.event_name }}';
+
+                start_info.title = '시작:' + decodeEntities('{{ shop.event_name }}');
                 start_info.start = '{{ shop.start_date|date:"c" }}';
 
                     {% if shop.end_date != null %}{
-                        end_info.title = '끝:{{ shop.event_name }}';
+                        end_info.title = '끝:' + decodeEntities('{{ shop.event_name }}');
                         end_info.start = '{{ shop.end_date|date:"c" }}';
 
-                        start_info.url = end_info.url = '{{ shop.link_url }}';
+                        start_info.url = end_info.url = decodeEntities('{{ shop.link_url }}');
 
                         {% if shop.roadshop_name == 'ETUDE_HOUSE' %}
                             start_info.color = 'rgba(255, 153, 255, 0.4)';
@@ -249,31 +250,31 @@
                             {% for shop in shops %}
                                 {
                                     {% if shop.roadshop_name == 'ETUDE_HOUSE' %}
-                                        title: 'ETUDE:{{ shop.event_name }}',
+                                        title: 'ETUDE:'+decodeEntities('{{ shop.event_name }}'),
                                         color : 'rgba(255, 153, 255, 0.4)',
                                     {% elif shop.roadshop_name == 'SKIN_FOOD' %}
-                                        title: 'SKINFOOD:{{ shop.event_name }}',
+                                        title: 'SKINFOOD:'+decodeEntities('{{ shop.event_name }}'),
                                         color : 'rgba(153, 153, 102, 0.4)',
                                     {% elif shop.roadshop_name == 'ARITAUM' %}
-                                        title: 'ARITAUM:{{ shop.event_name }}',
+                                        title: 'ARITAUM:'+decodeEntities('{{ shop.event_name }}'),
                                         color : 'rgba(255, 255, 255, 0.7)',
                                     {% elif shop.roadshop_name == 'INNISFREE' %}
-                                        title: 'INNISFREE:{{ shop.event_name }}',
+                                        title: 'INNISFREE:'+decodeEntities('{{ shop.event_name }}'),
                                         color : 'rgba(000, 255, 102, 0.4)',
                                     {% elif shop.roadshop_name == 'THE_FACE_SHOP' %}
-                                        title: 'THEFACESHOP:{{ shop.event_name }}',
+                                        title: 'THEFACESHOP:'+decodeEntities('{{ shop.event_name }}'),
                                         color : 'rgba(051, 102, 102, 0.4)',
                                     {% elif shop.roadshop_name == 'THE_SAEM' %}
-                                        title: 'THESAEM:{{ shop.event_name }}',
+                                        title: 'THESAEM:'+decodeEntities('{{ shop.event_name }}'),
                                         color : 'rgba(000, 255, 255, 0.4)',
                                     {% elif shop.roadshop_name == 'ITS_SKIN' %}
-                                        title: 'IT\'SSKIN:{{ shop.event_name }}',
+                                        title: 'IT\'SSKIN:'+decodeEntities('{{ shop.event_name }}'),
                                         color : 'rgba(152, 255, 255, 0.4)',
                                     {% elif shop.roadshop_name == 'NATURE_REPUBLIC' %}
-                                        title: 'NATURE:{{ shop.event_name }}',
+                                        title: 'NATURE:'+decodeEntities('{{ shop.event_name }}'),
                                         color : 'rgba(102, 102, 000, 0.3)',
                                     {% elif shop.roadshop_name == 'TONYMOLY' %}
-                                        title: 'TONYMOLY:{{ shop.event_name }}',
+                                        title: 'TONYMOLY:'+decodeEntities('{{ shop.event_name }}'),
                                         color : 'rgba(153, 153, 153, 0.4)',
                                     {% endif %}
 
@@ -290,6 +291,12 @@
             });
 
         });
+
+    function decodeEntities(encodedString) {
+        var textArea = document.createElement('textarea');
+        textArea.innerHTML = encodedString;
+        return textArea.value;
+    }
 
     </script>
 
