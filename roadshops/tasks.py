@@ -17,7 +17,7 @@ def readroadshops():
     thefaceshop()
     thesaem()
     itsskin()
-    #naturerepublic()
+    naturerepublic()
     tonymoly()
 
 
@@ -329,19 +329,13 @@ def naturerepublic():
     for event in eventlist:
         event_info = Roadshops()
 
-        period = event.find('div', 'event_date').get_text()
-        split_date = period.split('\r\n\t\t\t\t\t\t')[1]
-        start_date = split_date.split(' ~ ')[0]
-        end_date = split_date.split(' ~ ')[1]
-
         event_info.event_name = event.find('div', 'event_tit').get_text()
         event_info.roadshop_name = Roadshops.NATURE_REPUBLIC
         event_info.image_url = event.find('img').get('src')
         event_info.link_url = 'http://m.naturerepublic.com'+event.find('a').get('href')
 
-        event_info.start_date = datetime.strptime(start_date, "%Y.%m.%d")
-        if end_date[0] == '2' and end_date[1] == '0':
-            event_info.end_date = datetime.strptime(end_date + " 23:59:59", "%Y.%m.%d %H:%M:%S")
+        now = datetime.utcnow()
+        event_info.start_date = now
         event_info.is_active = 'Y'
 
         check_db('NATURE_REPUBLIC', event_info)
